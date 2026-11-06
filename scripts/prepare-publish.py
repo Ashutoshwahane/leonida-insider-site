@@ -35,9 +35,7 @@ for file in out.glob('*.html'):
             graph += [
                 {"@type":"Organization", "@id":publisher, "name":"Leonida Insider", "url":origin+'/', "logo":origin+'/assets/app-icon.png', "email":"cybernerd404notfound@gmail.com"},
                 {"@type":"WebSite", "@id":website, "name":"Leonida Insider", "url":origin+'/', "inLanguage":"en", "publisher":{"@id":publisher}},
-                {"@type":"MobileApplication", "@id":origin+'/#app', "name":"Leonida Insider", "applicationCategory":"ReferenceApplication", "operatingSystem":"Android", "downloadUrl":"https://play.google.com/store/apps/details?id=com.cybernerd404.gta6insider", "description":"Independent GTA VI companion with sourced editorial reading, article search, local saved articles and Discord community access. iOS coming soon.", "offers":{"@type":"Offer","price":0}, "publisher":{"@id":publisher}, "image":origin+'/assets/app-icon.png', "featureList":["Sourced editorial news","Article search","Saved articles on this device","Discord community link"]}
             ]
-            page['mainEntity'] = {"@id":origin+'/#app'}
         elif file.name == 'reading-announcements.html':
             graph.append({"@type":"Article", "@id":canonical+'#article', "headline":"Before you share that GTA VI headline, check these things.", "mainEntityOfPage":{"@id":canonical+'#page'}, "author":{"@type":"Organization","@id":publisher,"name":"Leonida Insider editorial","url":origin+'/about.html'}, "publisher":{"@id":publisher}, "dateCreated":"2026-11-06", "datePublished":"2026-11-06", "inLanguage":"en", "isAccessibleForFree":True, "description":"Check the source, date, platform, and wording before sharing a GTA VI headline."})
         elif file.name == 'articles.html':
