@@ -23,7 +23,7 @@ for file in out.glob('*.html'):
     if file.name!='404.html':
         txt=txt.replace('content="noindex, nofollow"','content="index, follow"')
         txt=txt.replace('</head>',f'<link rel="canonical" href="{canonical}"><meta property="og:url" content="{canonical}"></head>')
-    txt=txt.replace('content="assets/social-card.png"',f'content="{origin}/assets/social-card.png"')
+    txt=re.sub(r'content="assets/([^"]+)"', lambda m: 'content="'+origin+'/assets/'+m.group(1)+'"', txt)
     if file.name != '404.html':
         publisher = origin + '/#publisher'
         website = origin + '/#website'
@@ -37,7 +37,7 @@ for file in out.glob('*.html'):
                 {"@type":"WebSite", "@id":website, "name":"Leonida Insider", "url":origin+'/', "inLanguage":"en", "publisher":{"@id":publisher}},
             ]
         elif file.name == 'reading-announcements.html':
-            graph.append({"@type":"Article", "@id":canonical+'#article', "headline":"Before you share that GTA VI headline, check these things.", "mainEntityOfPage":{"@id":canonical+'#page'}, "author":{"@type":"Organization","@id":publisher,"name":"Leonida Insider editorial","url":origin+'/about.html'}, "publisher":{"@id":publisher}, "dateCreated":"2026-11-06", "datePublished":"2026-11-06", "inLanguage":"en", "isAccessibleForFree":True, "description":"Check the source, date, platform, and wording before sharing a GTA VI headline."})
+            graph.append({"@type":"Article", "@id":canonical+'#article', "headline":"Before you share that GTA VI headline, check these things.", "mainEntityOfPage":{"@id":canonical+'#page'}, "author":{"@type":"Organization","@id":publisher,"name":"Leonida Insider editorial","url":origin+'/about.html'}, "publisher":{"@id":publisher}, "dateCreated":"2026-11-06", "datePublished":"2026-11-06T05:06:23Z", "dateModified":"2026-11-06T05:19:02+00:00", "image":{"@type":"ImageObject","url":origin+"/assets/article-source-check.png","width":1200,"height":630}, "inLanguage":"en", "isAccessibleForFree":True, "description":"Check the source, date, platform, and wording before sharing a GTA VI headline."})
         elif file.name == 'articles.html':
             page['@type'] = 'CollectionPage'
             graph.append({"@type":"ItemList", "itemListElement":[{"@type":"ListItem","position":1,"url":origin+'/reading-announcements.html',"name":"Before you share that GTA VI headline, check these things."}]})
