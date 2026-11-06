@@ -51,6 +51,7 @@ for file in out.glob('*.html'):
             graph.append({"@type":"BreadcrumbList","itemListElement":crumbs})
         structured=json.dumps({"@context":"https://schema.org","@graph":graph},ensure_ascii=False).replace('<','\\u003c')
         txt=txt.replace('</head>','<script type="application/ld+json">'+structured+'</script></head>')
+    if file.name == '404.html': txt=txt.replace('</head>', '<base href="'+origin+'/"></head>')
     file.write_text(txt)
 ns='http://www.sitemaps.org/schemas/sitemap/0.9'
 ET.register_namespace('',ns)
